@@ -1,0 +1,121 @@
+/* --- 全局与背景设置 --- */
+:root {
+    /* 在这里修改背景 */
+    --background-style: radial-gradient(circle, #333a4d, #1f232e, #0f1117);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: var(--background-style);
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden; /* 保持页面整洁，绝不允许滚动条 */
+    color: white;
+}
+
+/* --- 视频墙容器 --- */
+#video-wall {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;    /* 恢复垂直居中对齐 */
+    align-content: center;  /* 恢复垂直居中对齐 */
+    width: 100vw;
+    height: 100vh;
+    padding: 20px; /* 适当调整内边距 */
+    box-sizing: border-box;
+    gap: 20px; /* 视频之间的间隙 */
+    transition: opacity 0.5s ease; /* 用于平滑切换 */
+}
+
+/* --- 单个视频的容器 --- */
+.video-container {
+    position: relative;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    background-color: #000;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
+}
+
+.video-container:hover {
+    transform: scale(1.05) translateZ(20px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8);
+    z-index: 10;
+}
+
+/* 视频元素本身 */
+.video-container video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 鼠标悬浮时显示的视频文件名 */
+.video-filename {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    padding: 8px 0;
+    box-sizing: border-box;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+    word-break: break-all;
+}
+
+.video-container:hover .video-filename {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- 导航按钮 --- */
+.nav-btn {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: translateY(-50%) scale(1);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#prev-btn {
+    left: 20px;
+}
+
+#next-btn {
+    right: 20px;
+}
